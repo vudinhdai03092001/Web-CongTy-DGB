@@ -1,0 +1,23 @@
+.img-banner {
+  width: 100%;
+  height: 300px;
+  filter: blur(2px); }
+
+.center {
+  display: flex;
+  justify-content: center; }
+
+.modal-dialog-add {
+  max-width: 1000px !important; }
+
+#displayArea {
+  white-space: pre-line;
+  white-space: pre; }
+
+.form-select {
+  width: 30%;
+  padding: .375rem 2.25rem .375rem .75rem;
+  -moz-padding-start: calc(0.75rem - 3px);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5; }

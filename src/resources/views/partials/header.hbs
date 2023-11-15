@@ -1,0 +1,77 @@
+<div class="top-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-3">
+                <div class="logo">
+                    <a href="">
+                        <img src="img/logo.png" alt="Logo">
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="search">
+                    <input type="text" placeholder="Search">
+                    <button><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            <div class="col-md-2">
+
+                <div>
+                    <strong> 0989898989</strong>
+                </div>
+                <div>
+                    Hotline tư vấn
+                </div>
+
+            </div>
+            <div class="col-md-2">
+
+                <div class="">
+                    <strong> Giờ làm việc:</strong>
+                </div>
+                <div class="">
+                    Mở cửa: 8:00-17:00
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Top Header End -->
+<!-- Header Start -->
+<div class="header">
+    <div class="container">
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a href="#" class="navbar-brand">MENU</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav m-auto">
+                    <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Giới thiệu</a>
+                         <div class="dropdown-menu">
+                            {{#each gioithieu}}
+                            <a href="/bai-viet/{{this.slug}}" class="dropdown-item">{{this.title}}</a>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dịch vụ</a>
+                        <div class="dropdown-menu">
+                            {{#each dichvu}}
+                            <a href="/bai-viet/{{this.slug}}" class="dropdown-item">{{this.title}}</a>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <a href="/tin-tuc" class="nav-item nav-link">Tin tức</a>
+                    <a href="contact.html" class="nav-item nav-link">Tra cứu giấy chứng nhận</a>
+                    <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Header End -->
