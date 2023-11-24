@@ -94,7 +94,7 @@ h6 {
 
 button.btn {
     color: #ffffff;
-   
+
     border-radius: 0;
 }
 
@@ -125,8 +125,8 @@ button.btn {
     width: 100%;
     height: 40px;
     padding: 0 15px;
-    color: #666666;
-    border: 1px solid #3F69AA;
+    color: #3f3f3f;
+    border: 1px solid #1aa900;
 }
 
 .top-header .search button {
@@ -138,12 +138,12 @@ button.btn {
     padding: 0 15px;
     border: none;
     background: none;
-    color: #3F69AA;
+    color: rgb(129, 255, 169);
 }
 
 .top-header .search button:hover {
-    background: #3F69AA;
-    color: #ffffff;
+
+    color: rgb(0, 171, 20);
 }
 
 .top-header .user {
@@ -174,20 +174,21 @@ button.btn {
     font-size: 14px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: px) {
     .top-header {
         max-height: 90px;
     }
 }
 
 @media (max-width: 767.98px) {
+
     .top-header .logo,
     .top-header .search,
     .top-header .user {
         text-align: center;
         margin-bottom: 15px;
     }
-    
+
     .top-header .user {
         margin-bottom: 0;
     }
@@ -214,33 +215,39 @@ button.btn {
     background: #f8f9fa;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 767px) {
+
+
     .header,
     .header .navbar {
-        background: #3F69AA !important;
+        background: #42a937 !important;
     }
-    
+
     .header .navbar-brand {
         display: none;
     }
-    
+
     .header a.nav-link {
         padding: 8px 15px;
-        font-size: 15px;
+     
         text-transform: uppercase;
     }
 }
 
-@media (max-width: 768px) {   
-    .header,
+@media (max-width: 767px) {
+
+  .sticky-footer{
+    display: none;
+  }
+     .header,
     .header .navbar {
-        background: #333333 !important;
+        background: #42a937 !important;
     }
-    
+
     .header a.nav-link {
         padding: 5px;
     }
-    
+
     .header .dropdown-menu {
         box-shadow: none;
     }
@@ -384,9 +391,9 @@ button.btn {
 
 .category .category-name {
     position: absolute;
-    top: 0; 
+    top: 0;
     right: 0;
-    bottom: 0; 
+    bottom: 0;
     left: 0;
     opacity: 0;
     background: rgba(63, 105, 170, .5);
@@ -396,7 +403,7 @@ button.btn {
 }
 
 .category .category-name:hover {
-    opacity: 1;     
+    opacity: 1;
 }
 
 .category .category-name h2 {
@@ -411,7 +418,7 @@ button.btn {
 }
 
 .category .category-name:hover h2 {
-    margin: 0;       
+    margin: 0;
 }
 
 
@@ -428,7 +435,7 @@ button.btn {
 .section-header h2,
 .section-header h3 {
     position: relative;
-    color: #3F69AA;
+    color: rgb(30, 152, 85);
     font-size: 35px;
     font-weight: 700;
     text-align: center;
@@ -439,7 +446,7 @@ button.btn {
 .section-header h2::after,
 .section-header h3::after {
     content: '';
-    position: absolute;
+
     width: 50px;
     height: 5px;
     left: calc(50% - 25px);
@@ -505,8 +512,8 @@ button.btn {
 /**********************************/
 .product-item {
     position: relative;
-    background-color: #f7f7f7;
-    padding-bottom: 15px;
+    background-color: #ffffff;
+
 }
 
 .product-item .product-image {
@@ -516,17 +523,17 @@ button.btn {
 
 .product-item .product-image a {
     display: block;
-    background: #3F69AA;
-    margin-bottom: 15px; 
+    background: rgb(248, 255, 248);
+    margin-bottom: 15px;
     transition: .3s;
 }
 
 .product-item:hover .product-image a {
-    background: rgba(63, 105, 170, .5);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .product-item .product-image img {
-    width: 100%; 
+    width: 100%;
 }
 
 .product-item:hover .product-image img {
@@ -543,12 +550,12 @@ button.btn {
     top: 50%;
     text-align: center;
     transition: .5s;
-    opacity: 0; 
+    opacity: 0;
 }
 
 .product-item:hover .product-image .product-action {
     top: calc(50% - 25px);
-    opacity: 1; 
+    opacity: 1;
 }
 
 .product-item .product-image .product-action a {
@@ -576,7 +583,7 @@ button.btn {
     position: relative;
     width: 100%;
     text-align: center;
-    background: #f7f7f7;
+    background: #ffffff;
 }
 
 .product-item .product-content .title,
@@ -604,7 +611,7 @@ button.btn {
 .product-item .product-content .price {
     font-size: 30px;
     color: #3F69AA;
-    font-weight: 700; 
+    font-weight: 700;
 }
 
 .product-item .product-content .price span {
@@ -631,7 +638,7 @@ button.btn {
 /**********************************/
 .featured-product {
     position: relative;
-    padding: 45px 0 60px 0;
+    padding: 45px 0 0 0;
 }
 
 .recent-product {
@@ -851,14 +858,14 @@ button.btn {
     background: #ffffff;
 }
 
-.product-detail  .nav.nav-pills .nav-link {
+.product-detail .nav.nav-pills .nav-link {
     color: #ffffff;
     background: rgba(63, 105, 170, .5);
     border-radius: 0;
 }
 
-.product-detail  .nav.nav-pills .nav-link:hover,
-.product-detail  .nav.nav-pills .nav-link.active {
+.product-detail .nav.nav-pills .nav-link:hover,
+.product-detail .nav.nav-pills .nav-link.active {
     color: #ffffff;
     background: #3F69AA;
 }
@@ -993,12 +1000,12 @@ button.btn {
 
 .sidebar-widget.brands ul li,
 .sidebar-widget.category ul li {
-    margin-bottom: 12px; 
+    margin-bottom: 12px;
 }
 
 .sidebar-widget.brands ul li:last-child,
 .sidebar-widget.category ul li:last-child {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 .sidebar-widget.brands ul li a,
@@ -1020,7 +1027,7 @@ button.btn {
 
 .sidebar-widget.brands ul li a:hover,
 .sidebar-widget.category ul li a:hover {
-    padding-left: 10px; 
+    padding-left: 10px;
 }
 
 .sidebar-widget.brands ul li span,
@@ -1433,12 +1440,12 @@ button.btn {
 }
 
 .brand-item {
-    text-align: center; 
+    text-align: center;
 }
 
 .brand-item img {
     max-width: 100%;
-    margin: auto; 
+    margin: auto;
 }
 
 
@@ -1569,7 +1576,7 @@ button.btn {
 .footer {
     position: relative;
     padding: 60px 0 0 0;
-    background: #3F69AA;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(0, 255, 26)), url('your-image.jpg');
 }
 
 @media (min-width: 992px) {
@@ -1585,8 +1592,8 @@ button.btn {
 }
 
 .footer .footer-widget h1 {
-    color: #ffffff;
-    margin-bottom: 18px; 
+    color: #00a133;
+    margin-bottom: 18px;
 }
 
 .footer .footer-widget .title {
@@ -1605,11 +1612,11 @@ button.btn {
 }
 
 .footer .footer-widget ul li {
-    margin-bottom: 12px; 
+    margin-bottom: 12px;
 }
 
 .footer .footer-widget ul li:last-child {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 .footer .footer-widget ul li a {
@@ -1626,7 +1633,7 @@ button.btn {
 }
 
 .footer .footer-widget ul li a:hover {
-    padding-left: 10px; 
+    padding-left: 10px;
 }
 
 .footer .contact-info p {
@@ -1687,14 +1694,15 @@ button.btn {
 }
 
 @media (max-width: 768.98px) {
+
     .footer .payment-method,
     .footer .payment-security {
-        text-align: center; 
-    } 
+        text-align: center;
+    }
 }
 
 .footer .payment-method p,
-.footer .payment-security p{
+.footer .payment-security p {
     display: inline-block;
     margin: 0 10px 0 0;
     color: #ffffff;
@@ -1740,8 +1748,9 @@ button.btn {
 }
 
 @media (max-width: 768.98px) {
+
     .footer-bottom .copyright,
     .footer-bottom .template-by {
-        text-align: center; 
-    } 
+        text-align: center;
+    }
 }

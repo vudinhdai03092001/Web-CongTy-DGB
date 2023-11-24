@@ -16,6 +16,7 @@
                     <th scope="col">STT</th>
                     <th scope="col">Tiêu đề</th>
                     <th scope="col">Thể loại</th>
+                    <th scope="col">Hình ảnh</th>
                     <th scope="col">Nội dung</th>
                     <th colspan="2">Hành động</th>
                 </tr>
@@ -23,9 +24,10 @@
             <tbody>
                 {{#each baiviet}}
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{{sum @index 1}}</th>
                     <td>{{this.title}}</td>
                     <td>{{this.category}}</td>
+                    <td><img src="/{{this.image}}" style="width:150px"></td>
                     <td> </a><button type="button" class="btn btn-success"><a href="/admin/bai-viet/{{this._id}}/detail"
                                 style="color: aliceblue;">Xem chi tiết</a></button></td>
                     <td> <a href="/admin/bai-viet/{{this._id}}/edit"><i class="bi bi-pencil"
@@ -38,6 +40,33 @@
             </tbody>
         </table>
     </section>
+    <div class="center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {{#if pagination.prev}}
+                <li class="page-item">
+                    <a class="page-link" href="/admin/bai-viet?page={{pagination.prev}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {{/if}}
+
+                {{#each pagination.pages}}
+                <li class="page-item {{#if this.active}}active{{/if}}">
+                    <a class="page-link" href="/admin/bai-viet?page={{this.number}}">{{this.number}}</a>
+                </li>
+                {{/each}}
+
+                {{#if pagination.next}}
+                <li class="page-item">
+                    <a class="page-link" href="/admin/bai-viet?page={{pagination.next}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {{/if}}
+            </ul>
+        </nav>
+    </div>
 </main>
 {{> footerAdmin}}
 
@@ -63,8 +92,16 @@
                         <select class="form-select" id="category" aria-label="Default select example">
                             <option value="Giới thiệu">Giới thiệu</option>
                             <option value="Dịch vụ">Dịch vụ</option>
+                             <option value="Tin tức">Tin Tức</option>
                         </select>
                     </div>
+                    <!-- Trường nhập file ẩn -->
+                    <input type="file" id="image" style="display: none;" name="image" accept="image/*">
+
+                    <label for="fileInput">Click chọn ảnh:
+                        <!-- Ảnh sẽ được hiển thị và click vào đây sẽ mở trình duyệt file dialog -->
+                        <img id="imagePreview" src="/img/slider-3.jpg" alt="Preview">
+                    </label>
                     <div class="form-group">
                         <label for="message-text" class="col-form-label">Nội dung:</label>
                         <div id="editor" style="min-height: 300px;"></div>
@@ -111,23 +148,57 @@
     var quill = new Quill('#editor', {
         theme: 'snow',
         placeholder: 'Nhập văn bản ở đây...',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],  // Các công cụ in đậm, in nghiêng, gạch chân, gạch đầu dòng
+                ['link', 'image'],  // Công cụ liên kết và hình ảnh
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],  // Công cụ chọn tiêu đề
+                [{ 'color': [] }, { 'background': [] }],  // Công cụ chọn màu văn bản và nền
+                ['list', 'bullet', 'indent', 'outdent'],  // Công cụ danh sách và thụt đầu dòng
+                ['undo', 'redo'],  // Công cụ hoàn tác và làm lại
+            ],
+
+        }
+    });
+
+    //id từ input
+    var img = document.getElementById('image')
+    var imagePreview = document.getElementById('imagePreview')
+    // Khi click vào ảnh, chuyển sự kiện click đến trường nhập file
+    imagePreview.addEventListener('click', function () {
+        img.click();
 
     });
+    // change ảnh khi chọn
+    img.addEventListener('change', function () {
+        if (img.files && img.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(img.files[0]);
+        }
+    });
+
     // thêm bài viết
     function onclickBaiViet() {
-
-        $.ajax({
-            url: '/admin/bai-viet/creat',
-            type: 'POST',
-            data: {
-                category: $('#category').val(),
-                title: $('#title').val(),
-                content: quill.root.innerHTML
-            }
-        })
-            .then(() => {
+        var title = document.getElementById('title').value
+        var category = document.getElementById('category').value
+        const file = img.files[0]
+        if (file && title && category) {
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('title', title);
+            formData.append('category', category);
+            formData.append('editor', quill.root.innerHTML);
+            fetch('/admin/bai-viet/creat', {
+                method: 'POST',
+                body: formData,
+            }).then(() => {
                 window.location.replace('/admin/bai-viet')
             })
+        }
+
     }
     // delete 
     const exampleModal = document.getElementById('delete-work-modal')

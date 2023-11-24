@@ -46,17 +46,18 @@
     
     
     // Product Slider 4 Column
-    $('.product-slider-4').slick({
+    $('.product-slider-6').slick({
         autoplay: true,
         infinite: true,
         dots: false,
-        slidesToShow: 4,
+        slidesToShow: 6,
         slidesToScroll: 1,
         responsive: [
+
             {
                 breakpoint: 1200,
                 settings: {
-                    slidesToShow: 4,
+                    slidesToShow: 6,
                 }
             },
             {

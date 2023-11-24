@@ -1,77 +1,99 @@
-<div class="top-header">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-3">
-                <div class="logo">
-                    <a href="">
-                        <img src="img/logo.png" alt="Logo">
-                    </a>
+<div class="header-scroll">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__left">
+                        <ul>
+                            <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                            <li>Liên hệ: 0912345678</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="header__top__right">
+                        <div class="header__top__right__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-envelope"></i></a>
+
+                        </div>
+                        <div class="header__top__right__language">
+                            <img src="img/language.png" alt="">
+                            <div>Chính sách bảo mật</div>
+                            <span class="arrow_carrot-down"></span>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
-            <div class="col-md-5">
-                <div class="search">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+    <div class="top-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <div class="logo">
+                        <a href="">
+                            <img src="/img/logo.png" alt="Logo">
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-
-                <div>
-                    <strong> 0989898989</strong>
+                <div class="col-md-5">
+                    <div class="search">
+                        <form id="paginationForm" action="/tim-kiem" method="get">
+                            <input type="text" name="search" placeholder="Search" value="{{ searchTerm }}">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
                 </div>
-                <div>
-                    Hotline tư vấn
-                </div>
-
-            </div>
-            <div class="col-md-2">
-
-                <div class="">
-                    <strong> Giờ làm việc:</strong>
-                </div>
-                <div class="">
-                    Mở cửa: 8:00-17:00
+                <div class="col-md-4">
+                    <div class="" style="float: right;">
+                        <span  style="color: green;"><i class="bi bi-alarm" style="color: rgb(5, 116, 47); font-size:24px"></i>
+                            <strong >Mở cửa:</strong> 8:00-17:00</span>
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
-</div>
-<!-- Top Header End -->
-<!-- Header Start -->
-<div class="header">
-    <div class="container">
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-            <a href="#" class="navbar-brand">MENU</a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <!-- Top Header End -->
+    <!-- Header Start -->
+    <div class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <a href="#" class="navbar-brand">MENU</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav m-auto">
-                    <a href="index.html" class="nav-item nav-link active">Trang chủ</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Giới thiệu</a>
-                         <div class="dropdown-menu">
-                            {{#each gioithieu}}
-                            <a href="/bai-viet/{{this.slug}}" class="dropdown-item">{{this.title}}</a>
-                            {{/each}}
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav m-auto">
+                        <a href="/" class="nav-item nav-link active">Trang chủ</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Giới thiệu</a>
+                            <div class="dropdown-menu">
+                                {{#each gioithieu}}
+                                <a href="/bai-viet/{{this.slug}}" class="dropdown-item">{{this.title}}</a>
+                                {{/each}}
+                            </div>
                         </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dịch vụ</a>
-                        <div class="dropdown-menu">
-                            {{#each dichvu}}
-                            <a href="/bai-viet/{{this.slug}}" class="dropdown-item">{{this.title}}</a>
-                            {{/each}}
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dịch vụ</a>
+                            <div class="dropdown-menu">
+                                {{#each dichvu}}
+                                <a href="/bai-viet/{{this.slug}}" class="dropdown-item">{{this.title}}</a>
+                                {{/each}}
+                            </div>
                         </div>
+                        <a href="/tin-tuc" class="nav-item nav-link">Tin tức</a>
+                        <a href="/tra-cuu-giay-chung-nhan" class="nav-item nav-link">Tra cứu giấy chứng nhận</a>
+                        <a href="/lien-he" class="nav-item nav-link">Liên hệ</a>
                     </div>
-                    <a href="/tin-tuc" class="nav-item nav-link">Tin tức</a>
-                    <a href="contact.html" class="nav-item nav-link">Tra cứu giấy chứng nhận</a>
-                    <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </div>
+    <!-- Header End -->
+
 </div>
-<!-- Header End -->

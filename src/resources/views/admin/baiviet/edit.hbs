@@ -27,8 +27,15 @@
                                         <select class="form-select" id="category" aria-label="Default select example">
                                             <option value="Giới thiệu">Giới thiệu</option>
                                             <option value="Dịch vụ">Dịch vụ</option>
+                                            <option value="Tin tức">Tin tức</option>
                                         </select>
                                     </div>
+                                    <!-- Trường nhập file ẩn -->
+                                    <input type="file" id="image" style="display: none;" name="image" accept="image/*">
+                                    <label for="fileInput">Bạn cần chọn lại hình ảnh:
+                                        <!-- Ảnh sẽ được hiển thị và click vào đây sẽ mở trình duyệt file dialog -->
+                                        <img id="imagePreview" src="/{{baiviet.image}}" alt="Preview">
+                                    </label>
                                     <div class="form-group">
                                         <label for="message-text" class="col-form-label">Nội dung:</label>
                                         <div id="editor" style="min-height: 300px;"></div>
@@ -51,6 +58,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script>
+
+    var img = document.getElementById('image')
+    var imagePreview = document.getElementById('imagePreview')
+    //lấy nội dung
     const getcontent = document.getElementById('getcontent')
     const content = document.getElementById('content').value
     getcontent.innerHTML = content
@@ -61,24 +72,58 @@
     // quill text
     var quill = new Quill('#editor', {
         theme: 'snow',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],  // Các công cụ in đậm, in nghiêng, gạch chân, gạch đầu dòng
+                ['link', 'image'],  // Công cụ liên kết và hình ảnh
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],  // Công cụ chọn tiêu đề
+                [{ 'color': [] }, { 'background': [] }],  // Công cụ chọn màu văn bản và nền
+                ['list', 'bullet', 'indent', 'outdent'],  // Công cụ danh sách và thụt đầu dòng
+                ['undo', 'redo'],  // Công cụ hoàn tác và làm lại
+            ],
+
+        }
     });
     //load data vẫn giữ  nguyên định dạng
     quill.clipboard.dangerouslyPasteHTML(contentWithHTML);
+
+    // Khi click vào ảnh, chuyển sự kiện click đến trường nhập file
+    imagePreview.addEventListener('click', function () {
+        img.click();
+
+    });
+    // change ảnh khi chọn
+    img.addEventListener('change', function () {
+        if (img.files && img.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(img.files[0]);
+        }
+    });
+
     //clickedit
     function onclickEdit() {
-        $.ajax({
-            url: `/admin/bai-viet/${getid}`,
-            type: 'PUT',
-            data: {
-                _id: getid,
-                category: $('#category').val(),
-                title: $('#title').val(),
-                content: quill.root.innerHTML
-            }
-        })
-            .then(() => {
-                window.location.replace('/admin/bai-viet')
+        var title = document.getElementById('title').value
+        var category = document.getElementById('category').value
+        const file = img.files[0]
+
+        if (file && title && category) {
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('id', getid);
+            formData.append('title', title);
+            formData.append('category', category);
+            formData.append('editor', quill.root.innerHTML);
+            fetch(`/admin/bai-viet/${getid}`, {
+                method: 'PUT',
+                body: formData,
             })
+                .then(() => {
+                    window.location.replace('/admin/bai-viet')
+                })
+        }
 
     }
 </script>

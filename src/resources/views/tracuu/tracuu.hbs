@@ -1,0 +1,66 @@
+{{> header}}
+
+<div class="main">
+    <div class="featured-product" style="background-color: rgb(255, 255, 255)">
+        <div class="container">
+            <div class="section-header">
+                <h3>Tra cứu giấy chứng nhận</h3>
+            </div>
+            <div class="section-main ">
+                <form action="/tra-cuu-giay-chung-nhan/search" method="POST">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="recipient-name" class="col-form-label"><strong>Nhập mã Chứng
+                                    Nhận</strong></label>
+                            <input type="text" name="madangky" class="form-control" id="madangky"
+                                placeholder="Nhập mã tra cứu ...">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="recipient-name" class="col-form-label"><strong>Ngày bắt đầu:</strong></label>
+                            <input type="date" class="form-control" id="ngaybatdau" name="ngaybatdau">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="recipient-name" class="col-form-label"><strong>Ngày kết thúc</strong></label>
+                            <input type="date" class="form-control" id="ngayketthuc" name="ngayketthuc">
+                        </div>
+                    </div>
+                    <div class="center"><button type="submit" class="site-btn">Tìm Kiếm</button></div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="recent-product" style="background-color: rgb(255, 255, 255)">
+        <div class="container">
+            {{#if tracuu}}
+            <div class="row " style="background-color: rgb(250, 255, 249);">
+                <div class="col-md-6" style="padding-top: 5%;">
+                    <h4><strong>Công ty: </strong>{{tracuu.congty}}</h4><br>
+                    <h4><strong>Địa chỉ:</strong> {{tracuu.diachi}}</h4><br>
+                    <h4><strong>Số điện thoại:</strong> {{tracuu.sdt}}</h4><br>
+                    <h4><strong>Người đại diện:</strong> {{tracuu.nguoidaidien}}</h4><br>
+                    <h4><strong>Trạng thái:</strong> {{tracuu.trangthai}}</h4><br>
+                </div>
+                <div class="col-md-6 center">
+                    <embed src="/{{tracuu.filepdf}}" width="400px" height="500px" />
+                </div>
+            </div>
+            {{/if}}
+
+            {{#unless tracuu}}
+            <div class="row ">
+                <div class="col-md-6 ">
+                    <br>
+                    <br>
+                    <h4><strong>Không tìm thấy!</strong></h4>
+                    <p>Chúng tôi không tìm thấy chứng chỉ phù hợp với yêu cầu của bạn. Vui lòng nhập từ khóa khác.</p>
+                </div>
+                <div class="col-md-6 center"><img src="/img/not-found.png" style="max-height: 200px;"></div>
+            </div>
+            {{/unless}}
+
+        </div>
+    </div>
+</div>
+
+{{> footer}}
