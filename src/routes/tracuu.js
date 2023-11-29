@@ -2,13 +2,14 @@ const express = require('express')
 const router = express.Router()
 const TraCuuController = require('../app/controller/TraCuuController')
 const upload = require('../app/middlewares/uploadMilddle')
-router.get('/', TraCuuController.index)
-router.post('/creat', upload.single('filepdf'), TraCuuController.creat)
+const CheckController = require('../app/middlewares/checkout')
+router.get('/', CheckController.checkout, TraCuuController.index)
+router.post('/creat', CheckController.checkout, upload.single('filepdf'), TraCuuController.creat)
 
 //xóa
-router.delete('/:id', TraCuuController.delete)
+router.delete('/:id', CheckController.checkout, TraCuuController.delete)
 //form edit
-router.get('/:id/edit', TraCuuController.edit)
+router.get('/:id/edit', CheckController.checkout, TraCuuController.edit)
 //update
-router.put('/:id', upload.single('filepdf'), TraCuuController.update)
+router.put('/:id', CheckController.checkout, upload.single('filepdf'), TraCuuController.update)
 module.exports = router

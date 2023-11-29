@@ -1,19 +1,32 @@
 {{> header}}
-
 <div class="main">
+    {{!-- <section class="breadcrumb-section set-bg" data-setbg="/img/logo.png"
+        style="background-image: url(/img/banner3.jpg)">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Liên hệ</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Trang chủ</a>
+                            <span>Liên hệ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="featured-product">
         <div class="container">
-            <div class="section-header">
-                <h3>Thông tin liên hệ</h3>
-            </div>
+
             <div class="section-main  ">
                 <div class="row">
                     <div class="col-md-4">
                         <h4> CÔNG TY CỔ PHẦN CHỨNG NHẬN VÀ KIỂM NGHIỆM FAO</h4><br>
-                        <p><i class="fa fa-map-marker"></i>Số 35, ngách 93/15, phố Yên Sở, quận Hoàng Mai, thành phố Hà
+                        <p><i class="fa fa-map-marker"></i> Số 35, ngách 93/15, phố Yên Sở, quận Hoàng Mai, thành phố Hà
                             Nội</p>
-                        <p><i class="fa fa-envelope"></i>info@lamhai.net</p>
-                        <p><i class="fa fa-phone"></i>+123-456-7890</p>
+                        <p><i class="fa fa-envelope"></i> info@lamhai.net</p>
+                        <p><i class="fa fa-phone"></i> +123-456-7890</p>
                     </div>
                     <div class="col-md-8">
                         <iframe
@@ -24,6 +37,116 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_phone"></span>
+                        <h4>Điện thoại</h4>
+                        <p>+01-3-8888-6868</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_pin_alt"></span>
+                        <h4>Địa chỉ</h4>
+                        <p>Số 35, ngách 93/15, phố Yên Sở, quận Hoàng Mai, thành phố Hà Nội</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_clock_alt"></span>
+                        <h4>Mở cửa</h4>
+                        <p>8:00 am to 17:00 pm</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                    <div class="contact__widget">
+                        <span class="icon_mail_alt"></span>
+                        <h4>Email</h4>
+                        <p>hello@colorlib.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section End -->
+    <!-- Map Begin -->
+    <div class="map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4462.6597760533305!2d105.86695482335762!3d20.967082618308194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac2eda498065%3A0xdb1662851b929665!2zMzUgTmdoLiA5My8xNSBQLiBZw6puIFPGocyJLCBZw6puIFPhu58sIEhvw6BuZyBNYWksIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1701050070743!5m2!1svi!2s"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-inside">
+            <i class="icon_pin"></i>
+            <div class="inside-widget">
+                <h4>Hà Nội</h4>
+                <ul>
+                    <li>Điện thoại: +12-345-6789</li>
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Map End -->
+    <!-- Contact Form Begin -->
+    <div class="contact-form spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="contact__form__title">
+                        <h2>Thông tin liên hệ</h2>
+                    </div>
+                </div>
+            </div>
+            <form action="#">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <input type="text" placeholder="Tên của bạn" id="sendername">
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <input type="number" placeholder="Số điện thoại" id="sdt">
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <input type="text" placeholder="Email của bạn" id="replyto">
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <textarea placeholder="Để lại lời nhắn cho chúng tôi" id="message"></textarea>
+
+                    </div>
+                </div>
+            </form>
+            <button class="site-btn" onclick="Lienhe()">Gửi thông tin</button>
+        </div>
     </div>
 </div>
 {{> footer}}
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    function Lienhe() {
+        (function () {
+            emailjs.init("SivOPYE4qBGxdC_A4"); // Account Public Key
+        })();
+        var params = {
+            sendername: document.querySelector('#sendername').value,
+            //   subject: document.querySelector('#subject').value,
+
+            sdt: document.querySelector('#sdt').value,
+            replyto: document.querySelector('#replyto').value,
+            message: document.querySelector('#message').value,
+        };
+        var serviceID = "service_fo2x0ds"; // Email Service ID
+        var templateID = "template_3vznvia"; // Email Template ID
+
+        emailjs.send(serviceID, templateID, params)
+            .then(res => {
+                alert("Email sent successfully!!")
+            })
+            .catch();
+
+
+    }
+</script>

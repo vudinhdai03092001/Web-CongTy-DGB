@@ -24,18 +24,19 @@ class HomeController {
             .catch(next)
     }
     tracuu(req, res, next) {
-        res.render('tracuu/tracuu')
+        Promise.all([BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
+        BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean()])
+            .then(([dichvu, gioithieu]) => { res.render('tracuu/tracuu', { dichvu, gioithieu }) })
+            .catch(next)
+
     }
-
-
-
     tintuc(req, res, next) {
         const page = parseInt(req.query.page) || 1; // Trang hiện tại
         const pageSize = 6; // Kích thước trang
         const startIndex = (page - 1) * pageSize;
         const endIndex = page * pageSize;
         Promise.all([BaiViet.find({ category: { $regex: 'tin tức', $options: 'i' } }).lean(),
-        BaiViet.find({ category: { $regex: 'tin tức', $options: 'i' } }).lean().sort({ createdAt: -1 }).limit(5),
+        BaiViet.find({ category: { $regex: 'tin tức', $options: 'i' } }).lean().sort({ createdAt: -1 }).limit(9),
         BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
         BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean()])
 
@@ -70,40 +71,48 @@ class HomeController {
         const madangky = req.body.madangky
         const ngaybatdau = req.body.ngaybatdau
         const ngayketthuc = req.body.ngayketthuc
+        Promise.all([BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
+        BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean(),
         TraCuu.findOne({
             madangky: madangky,
             ngaybatdau: ngaybatdau,
             ngayketthuc: ngayketthuc
-        }).lean()
-            .then(tracuu => res.render('tracuu/tracuu', { tracuu }))
+        }).lean()])
+
+            .then(([dichvu, gioithieu, tracuu]) => res.render('tracuu/tracuu', { dichvu, gioithieu, tracuu }))
             .catch(next)
     }
     lienhe(req, res, next) {
-        res.render('lienhe/lienhe')
+        Promise.all([BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
+        BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean()])
+            .then(([dichvu, gioithieu]) => { res.render('lienhe/lienhe', { dichvu, gioithieu }) })
+            .catch(next)
     }
-
-
     timkiem(req, res, next) {
         const page = parseInt(req.query.page) || 1;
         const pageSize = 9;
         const startIndex = (page - 1) * pageSize;
         const endIndex = page * pageSize;
         const searchTerm = req.query.search || '';
+        Promise.all([BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
+        BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean(),
+        BaiViet.find({ title: { $regex: searchTerm, $options: 'i' } }).lean()])
 
-        BaiViet.find({ title: { $regex: searchTerm, $options: 'i' } }).lean()
-            .then((data) => {
+            .then(([dichvu, gioithieu, data]) => {
                 const totalPages = Math.ceil(data.length / pageSize);
                 const pages = Array.from({ length: totalPages }, (_, index) => {
-                
-                        return {
-                            number: index + 1,
-                            active: index + 1 === page,
-                            isDots: index + 1 > 5
-                        };
+
+                    return {
+                        number: index + 1,
+                        active: index + 1 === page,
+                        isDots: index + 1 > 5
+                    };
                 });
                 const paginatedData = data.slice(startIndex, endIndex);
                 // Chuẩn bị dữ liệu để truyền vào template
                 const viewData = {
+                    dichvu: dichvu,
+                    gioithieu: gioithieu,
                     data: paginatedData,
                     searchTerm,
 
@@ -119,6 +128,9 @@ class HomeController {
             })
 
 
+    }
+    error404(req, res) {
+        res.render('error404/error')
     }
 }
 module.exports = new HomeController

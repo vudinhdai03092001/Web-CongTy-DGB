@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const slug = require('mongoose-slug-generator');
+const mongooseDelete = require('mongoose-delete')
 const BaiVietSchema = new Schema({
     title: { type: String },
     image: { type: String },
@@ -10,5 +11,11 @@ const BaiVietSchema = new Schema({
     date: { type: String },
     createdAt: { type: Date, default: Date.now }
 });
+
+//add plugin
 mongoose.plugin(slug);
+BaiVietSchema.plugin(mongooseDelete, {
+    deleteAt: true,
+    overrideMethods: 'all'
+});
 module.exports = mongoose.model('baiviets', BaiVietSchema)

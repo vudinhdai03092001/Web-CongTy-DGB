@@ -9,8 +9,12 @@ const db = require('./config/db')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
 const paginate = require('handlebars-paginate');
+var cookieParser = require('cookie-parser')
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+//cookies
+app.use(cookieParser())
 
 app.use(express.urlencoded({
     extended:true

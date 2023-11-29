@@ -403,20 +403,20 @@ h6 {
   /* Search Bar */
 }
 
-.header-admin.toggle-sidebar-btn {
+.header-admin .toggle-sidebar-btn {
   font-size: 32px;
   padding-left: 10px;
   cursor: pointer;
   color: #012970;
 }
 
-.header-admin.search-bar {
+.header-admin .search-bar {
   min-width: 360px;
   padding: 0 20px;
 }
 
 @media (max-width: 1199px) {
-  .header-admin.search-bar {
+  .header-admin .search-bar {
     position: fixed;
     top: 50px;
     left: 0;
@@ -430,18 +430,18 @@ h6 {
     opacity: 0;
   }
 
-  .header-admin.search-bar-show {
+  .header-admin .search-bar-show {
     top: 60px;
     visibility: visible;
     opacity: 1;
   }
 }
 
-.header-admin.search-form {
+.header-admin .search-form {
   width: 100%;
 }
 
-.header-admin.search-form input {
+.header-admin .search-form input {
   border: 0;
   font-size: 14px;
   color: #012970;
@@ -452,21 +452,21 @@ h6 {
   width: 100%;
 }
 
-.header-admin.search-form input:focus,
-.header-admin.search-form input:hover {
+.header-admin .search-form input:focus,
+.header-admin .search-form input:hover {
   outline: none;
   box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
   border: 1px solid rgba(1, 41, 112, 0.3);
 }
 
-.header-admin.search-form button {
+.header-admin .search-form button {
   border: 0;
   padding: 0;
   margin-left: -30px;
   background: none;
 }
 
-.header-admin.search-form button i {
+.header-admin .search-form button i {
   color: #012970;
 }
 

@@ -2,10 +2,38 @@
 const TraCuus = require('../models/tracuu')
 class TraCuuController {
     index(req, res, next) {
+        const page = parseInt(req.query.page) || 1; // Trang hiện tại
+        const pageSize = 4; // Kích thước trang
+        const startIndex = (page - 1) * pageSize;
+        const endIndex = page * pageSize;
         TraCuus.find({}).lean()
-            .then(tracuu => {
-                res.render('admin/tracuu/tracuu', { tracuu })
+            .then(data => {
+                const totalPages = Math.ceil(data.length / pageSize);
+                const pages = Array.from({ length: totalPages }, (_, index) => {
+                    return {
+                        number: index + 1,
+                        active: index + 1 === page,
+                        isDots: index + 1 > 5
+                    };
+                });
+                const paginatedData = data.slice(startIndex, endIndex);
+                // Chuẩn bị dữ liệu để truyền vào template
+                const viewData = {
+
+                    tracuu: paginatedData,
+                    pagination: {
+                        prev: page > 1 ? page - 1 : null,
+                        next: endIndex < data.length ? page + 1 : null,
+                        pages: pages,
+                    },
+                };
+                // Render template và truyền dữ liệu
+                res.render('admin/tracuu/tracuu', viewData);
             })
+
+            .catch(next)
+
+       
     }
     creat(req, res, next) {
         const currentDate = new Date();
