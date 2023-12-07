@@ -12,7 +12,7 @@ class UserController {
         try {
             var username = req.body.username
             var password = req.body.password
-            console.log(password)
+          
             //tìm kiếm user theo tên
             Account.findOne({
                 username,

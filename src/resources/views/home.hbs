@@ -10,24 +10,23 @@
             </ul>
             <div class="carousel-inner">
                 <div class="carousel-item active" style="overflow: hidden;">
-                    <img src="/img/banner4.jpg" class="img-banner"
-                        alt="Los Angeles" id="zoomInImage">
+                    <img src="/img/banner22.jpg" class="img-banner" alt="Los Angeles" id="zoomInImage">
                     <div class="carousel-caption">
-                        <h1 class="color-white " id="zoomtext">Nâng tầm giá trị Việt</h1>
-                        <p class="color-white ">We had such a great time in LA!</p>
+                        <h3 class="color-white " id="zoomtext">Nông sản Việt Nam </h3>
+                        <p class="color-white ">We had such a</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://fao.com.vn/public/upload/slide/slide2-new.jpg" alt="Chicago" class="img-banner">
+                    <img src="/img/banner29.jpg" alt="Chicago" class="img-banner">
                     <div class="carousel-caption">
-                        <h1 class="color-white ">Nâng tầm giá trị Việt</h1>
+                        <h3 class="color-white ">Sản phẩm nông nghiệp </h3>
                         <p class="color-white ">Thank you, Chicago!</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://fao.com.vn/public/upload/slide/slide2-new.jpg" alt="New York" class="img-banner">
+                    <img src="/img/banner21.jpg" alt="New York" class="img-banner">
                     <div class="carousel-caption">
-                        <h1 class="color-white ">Nâng tầm giá trị Việt</h1>
+                        <h3 class="color-white ">Nâng tầm giá trị </h3>s
                         <p class="color-white ">We love the Big Apple!</p>
                     </div>
                 </div>
@@ -72,15 +71,18 @@
                 </p>
             </div>
             <div class="row align-items-center product-slider product-slider-6">
-                {{#each dichvu}}
-                <div class="col-lg-2">
-                    <div class="product-item " style="border-radius:8%;">
-                        <div class="product-image image-hover" style="border: 1px solid #ffffff;
-                     box-shadow: 0 0 10px rgba(180, 255, 180, 0.5);border-radius:8%;">
-                            <a href="product-detail.html">
-                                <img src="/{{this.image}}" alt="Product Image">
-                            </a>
-                            <p>{{this.title}}</p>
+                {{#each showlogo}}
+                <div class="col-lg-2" style="border-radius:8%;">
+                    <div class="product-item "  style="border-radius:8%;" >
+                        <div class="product-image image-hover" >
+                            <img src="/{{this.image}}" alt="Product Image">                          
+                        </div>
+                        <div class="product-content" style="height: 102px; border-radius:8%;">
+                             <span class="title-logo center" style="text-align: center; ">
+                                {{!-- <p style="font-weight: bold;">{{this.title}}</p> --}}
+                                 <div class="title"><a href="/bai-viet/{{this.slug}}">{{this.title}}</a></div>       
+                            </span>
+                                              
                         </div>
                     </div>
                 </div>
@@ -117,5 +119,11 @@
 <script>
     const content = document.getElementById('content')
     const getcontent = content.getAttribute('getcontent')
-    content.innerHTML = getcontent    
+    content.innerHTML = getcontent
+
+</script>
+
+<script>
+    // JavaScript để xóa thuộc tính của thẻ
+    document.querySelector('.carousel-caption').style.left = null;
 </script>

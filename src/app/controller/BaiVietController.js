@@ -40,6 +40,8 @@ class BaiVietController {
             category: req.body.category,
             image: req.file.path,
             content: req.body.editor,
+            showmenu: req.body.showmenu,
+            showlogo: req.body.showlogo,
             date: moment().format('DD-MM-YYYY')
         })
         baiviet.save()
@@ -66,16 +68,43 @@ class BaiVietController {
     }
     //[PUT] UPDATE /:id
     update(req, res, next) {
+        if (req.file) {
+            BaiViets.findById(req.body.id, (err, doc) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    doc.title = req.body.title,
+                        doc.image = req.file.path,
+                        doc.category = req.body.category,
+                        doc.content = req.body.editor,
+                        doc.showlogo = req.body.showlogo,
+                        doc.showmenu = req.body.showmenu,
+                        doc.date = moment().format('DD-MM-YYYY')
+                    doc.save()
+                        .then(() => res.json({ message: 'thành công' }))
+                        .catch(next)
+                }
+            })
+        }
+        else if (req.body.image) {
+            BaiViets.findById(req.body.id, (err, doc) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    doc.title = req.body.title,
+                        doc.image = req.body.image,
+                        doc.category = req.body.category,
+                        doc.content = req.body.editor,
+                        doc.showlogo = req.body.showlogo,
+                        doc.showmenu = req.body.showmenu,
+                        doc.date = moment().format('DD-MM-YYYY')
+                    doc.save()
+                        .then(() => res.json({ message: 'thành công' }))
+                        .catch(next)
+                }
+            })
+        }
 
-        BaiViets.updateOne({ _id: req.body.id }, {
-            title: req.body.title,
-            image: req.file.path,
-            category: req.body.category,
-            content: req.body.editor,
-            date: moment().format('DD-MM-YYYY')
-        }).lean()
-            .then(() => res.redirect('/admin/bai-viet'))
-            .catch(next)
     }
 
     searchAdmin(req, res, next) {

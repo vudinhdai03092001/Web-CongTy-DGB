@@ -2,7 +2,7 @@
 <input type="hidden" name="" id="content" value="{{baiviet.content}}">
 <div class="main">
     <section class="breadcrumb-section set-bg" data-setbg="/img/logo.png"
-        style="background-image: url(/img/banner3.jpg)">
+        style="background-image: url(/img/bannersmall4.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -18,15 +18,18 @@
         </div>
     </section>
     <div class="featured-product">
-        <div class="container">            
+        <div class="container">
             <div class="section-main row center">
-                <div id="text"></div>
+                <div id="text" style="width: 100%;">
+
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script>
     const value = document.getElementById('content').value;
+
     const html = document.getElementById('text')
     html.innerHTML = value
 </script>

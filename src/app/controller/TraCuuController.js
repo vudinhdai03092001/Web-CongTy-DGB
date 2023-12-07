@@ -30,10 +30,7 @@ class TraCuuController {
                 // Render template và truyền dữ liệu
                 res.render('admin/tracuu/tracuu', viewData);
             })
-
             .catch(next)
-
-       
     }
     creat(req, res, next) {
         const currentDate = new Date();
@@ -55,32 +52,46 @@ class TraCuuController {
             .then(() => res.redirect('back'))
             .catch(next)
     }
-
     // [GET] Edit /:id
     edit(req, res, next) {
         TraCuus.findById(req.params.id).lean()
             .then(tracuu => res.render('admin/tracuu/edit', { tracuu }))
             .catch(next)
-
     }
     //[PUT] UPDATE /:id
     update(req, res, next) {
-
-        TraCuus.updateOne({ _id: req.params.id }, {
-            madangky: req.body.madangky,
-            filepdf: req.file.path,
-            conty: req.body.congty,
-            diachi: req.body.diachi,
-            sdt: req.body.sdt,
-            nguoidaidien: req.body.nguoidaidien,
-            ngaybatdau: req.body.ngaybatdau,
-            ngayketthuc: req.body.ngayketthuc,
-            trangthai: req.body.trangthai,
+        if (req.file) {
+            TraCuus.updateOne({ _id: req.params.id }, {
+                madangky: req.body.madangky,
+                filepdf: req.file.path,
+                congty: req.body.congty,
+                diachi: req.body.diachi,
+                sdt: req.body.sdt,
+                nguoidaidien: req.body.nguoidaidien,
+                ngaybatdau: req.body.ngaybatdau,
+                ngayketthuc: req.body.ngayketthuc,
+                trangthai: req.body.trangthai,
+            }).lean()
+                .then(() => res.redirect('/admin/tra-cuu-giay-chung-nhan'))
+                .catch(next)
+        }
+        else {
+            TraCuus.updateOne({ _id: req.params.id }, {
+                madangky: req.body.madangky,
+                filepdf: req.body.urlFile,
+                congty: req.body.congty,
+                diachi: req.body.diachi,
+                sdt: req.body.sdt,
+                nguoidaidien: req.body.nguoidaidien,
+                ngaybatdau: req.body.ngaybatdau,
+                ngayketthuc: req.body.ngayketthuc,
+                trangthai: req.body.trangthai,
+            }
+            ).lean()
+                .then(() => res.redirect('/admin/tra-cuu-giay-chung-nhan'))
+                .catch(next)
         }
 
-        ).lean()
-            .then(() => res.redirect('/admin/tra-cuu-giay-chung-nhan'))
-            .catch(next)
     }
 }
 module.exports = new TraCuuController

@@ -6,27 +6,33 @@ const TraCuu = require('../models/tracuu')
 
 class HomeController {
     index(req, res, next) {
-        Promise.all([BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
-        BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean(),
-        BaiViet.findOne({ title: "Giới thiệu tổ chức" }).lean()])
-            .then(([dichvu, gioithieu, gioithieutochuc]) => {
-                res.render('home', { dichvu, gioithieu, gioithieutochuc })
+        Promise.all([
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showmenu: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showlogo: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean(),
+            BaiViet.findOne({ title: "Giới thiệu tổ chức" }).lean()])
+            .then(([showmenu, showlogo, gioithieu, gioithieutochuc]) => {
+                res.render('home', { showmenu, showlogo, gioithieu, gioithieutochuc })
             })
             .catch(next)
     }
     baiviet(req, res, next) {
-        Promise.all([BaiViet.findOne({ slug: req.params.slug }).lean(),
-        BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
-        BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean()])
-            .then(([baiviet, dichvu, gioithieu]) => {
-                res.render('baiviet/detail', { baiviet, dichvu, gioithieu })
+        Promise.all([
+            BaiViet.findOne({ slug: req.params.slug }).lean(),
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showmenu: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showlogo: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean()])
+            .then(([baiviet, showmenu, showlogo, gioithieu]) => {
+                res.render('baiviet/detail', { baiviet, showmenu, showlogo, gioithieu })
             })
             .catch(next)
     }
     tracuu(req, res, next) {
-        Promise.all([BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
-        BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean()])
-            .then(([dichvu, gioithieu]) => { res.render('tracuu/tracuu', { dichvu, gioithieu }) })
+        Promise.all([
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showmenu: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showlogo: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean()])
+            .then(([showmenu, showlogo, gioithieu]) => { res.render('tracuu/tracuu', { showmenu, showlogo, gioithieu }) })
             .catch(next)
 
     }
@@ -37,10 +43,13 @@ class HomeController {
         const endIndex = page * pageSize;
         Promise.all([BaiViet.find({ category: { $regex: 'tin tức', $options: 'i' } }).lean(),
         BaiViet.find({ category: { $regex: 'tin tức', $options: 'i' } }).lean().sort({ createdAt: -1 }).limit(9),
-        BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
+        BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showmenu: { $regex: 'co', $options: 'i' } }).lean(),
+        BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showlogo: { $regex: 'co', $options: 'i' } }).lean(),
         BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean()])
 
-            .then(([data, latestPosts, dichvu, gioithieu]) => {
+            .then(([data, latestPosts, showmenu, showlogo, gioithieu]) => {
+
+
                 const totalPages = Math.ceil(data.length / pageSize);
                 const pages = Array.from({ length: totalPages }, (_, index) => {
                     return {
@@ -49,9 +58,11 @@ class HomeController {
                     };
                 });
                 const paginatedData = data.slice(startIndex, endIndex);
+                paginatedData.title = 'test'
                 // Chuẩn bị dữ liệu để truyền vào template
                 const viewData = {
-                    dichvu: dichvu,
+                    showmenu: showmenu,
+                    showlogo: showlogo,
                     gioithieu: gioithieu,
                     latestPosts: latestPosts,
                     tintuc: paginatedData,
@@ -71,21 +82,25 @@ class HomeController {
         const madangky = req.body.madangky
         const ngaybatdau = req.body.ngaybatdau
         const ngayketthuc = req.body.ngayketthuc
-        Promise.all([BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
-        BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean(),
-        TraCuu.findOne({
-            madangky: madangky,
-            ngaybatdau: ngaybatdau,
-            ngayketthuc: ngayketthuc
-        }).lean()])
+        Promise.all([
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showmenu: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showlogo: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean(),
+            TraCuu.findOne({
+                madangky: madangky,
+                ngaybatdau: ngaybatdau,
+                ngayketthuc: ngayketthuc
+            }).lean()])
 
-            .then(([dichvu, gioithieu, tracuu]) => res.render('tracuu/tracuu', { dichvu, gioithieu, tracuu }))
+            .then(([showmenu, showlogo, gioithieu, tracuu]) => res.render('tracuu/tracuu', { showmenu, showlogo, gioithieu, tracuu }))
             .catch(next)
     }
     lienhe(req, res, next) {
-        Promise.all([BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
-        BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean()])
-            .then(([dichvu, gioithieu]) => { res.render('lienhe/lienhe', { dichvu, gioithieu }) })
+        Promise.all([
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showmenu: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showlogo: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean()])
+            .then(([showmenu, showlogo, gioithieu]) => { res.render('lienhe/lienhe', { showmenu, showlogo, gioithieu }) })
             .catch(next)
     }
     timkiem(req, res, next) {
@@ -94,11 +109,13 @@ class HomeController {
         const startIndex = (page - 1) * pageSize;
         const endIndex = page * pageSize;
         const searchTerm = req.query.search || '';
-        Promise.all([BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' } }).lean(),
-        BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean(),
-        BaiViet.find({ title: { $regex: searchTerm, $options: 'i' } }).lean()])
+        Promise.all([
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showmenu: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'dịch vụ', $options: 'i' }, showlogo: { $regex: 'co', $options: 'i' } }).lean(),
+            BaiViet.find({ category: { $regex: 'giới thiệu', $options: 'i' } }).lean(),
+            BaiViet.find({ title: { $regex: searchTerm, $options: 'i' } }).lean()])
 
-            .then(([dichvu, gioithieu, data]) => {
+            .then(([showmenu, showlogo, gioithieu, data]) => {
                 const totalPages = Math.ceil(data.length / pageSize);
                 const pages = Array.from({ length: totalPages }, (_, index) => {
 
@@ -111,7 +128,8 @@ class HomeController {
                 const paginatedData = data.slice(startIndex, endIndex);
                 // Chuẩn bị dữ liệu để truyền vào template
                 const viewData = {
-                    dichvu: dichvu,
+                    showmenu: showmenu,
+                    showlogo: showlogo,
                     gioithieu: gioithieu,
                     data: paginatedData,
                     searchTerm,

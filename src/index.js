@@ -8,8 +8,8 @@ const route = require('./routes')
 const db = require('./config/db')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
-const paginate = require('handlebars-paginate');
 var cookieParser = require('cookie-parser')
+const striptags = require('striptags');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
@@ -17,8 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser())
 
 app.use(express.urlencoded({
-    extended:true
-  }))
+    extended: true
+}))
 
 //change method
 app.use(methodOverride('_method'))
@@ -32,8 +32,15 @@ app.use(express.json())
 app.engine('hbs', handlebars.engine({
     extname: '.hbs',
     helpers: {
-        paginate: paginate.createPagination,
+
         sum: (a, b) => a + b,
+        truncateDescription: function (description) {
+            if (description.length > 0) {
+                return striptags(description.substring(0, 150) + '...');
+            }
+            return description;
+        },
+
     }
 }));
 
